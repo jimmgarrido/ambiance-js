@@ -1,6 +1,6 @@
 import React from 'react';
 import WeatherDetails from './components/WeatherDetails';
-import DateHeader from './components/DateHeader'
+import HistoryChart from './components/HistoryChart'
 import './css/mini-default.css';
 import './css/App.scss';
 
@@ -9,7 +9,8 @@ class App extends React.Component {
     super(props)
     this.state = {
       weatherData : null,
-      forecastData: null
+      forecastData: null,
+      historicalData : null
     }
     this.refreshCount = 0
   }
@@ -32,10 +33,19 @@ class App extends React.Component {
       return res.json()
     })
     .then((data) => {
-      console.log(data)
       this.setState({
         weatherData: data.weatherData[0],
-        forecastData: data.forecastData 
+        forecastData: data.forecastData
+      })
+    })
+
+    fetch('http://localhost:4000/api/history')
+    .then((res) => {
+      return res.json()
+    })
+    .then((data) => {
+      this.setState({
+        historicalData: data.data
       })
     })
   }
@@ -48,7 +58,8 @@ class App extends React.Component {
         <div className="App">
           <div className="container">
             <main>
-              <WeatherDetails data={this.state.weatherData.lastData} prevData={this.state.weatherData.previousData} forecast={this.state.forecastData.data} />
+              <WeatherDetails data={this.state.weatherData.lastData} forecast={this.state.forecastData.data} />
+              <HistoryChart data={this.state.historicalData} />
             </main>
           </div>
         </div>

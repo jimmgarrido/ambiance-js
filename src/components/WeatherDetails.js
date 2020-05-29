@@ -78,7 +78,7 @@ class WeatherDetails extends React.Component {
                 <h4>Wind Speed</h4>
                 <h1>{this.props.data.windspeedmph} <span className="minor-label">mph</span> {this.getWindCardinalDir(this.props.data.winddir)}</h1>
                 <h4>Gust</h4>
-                <h1>{this.props.data.windgustmph} <span className="minor-label">mph</span> / {this.props.data.maxdailygust} <span className="minor-label">mph</span></h1>
+                <h1>{this.props.data.windgustmph} <span className="minor-label">mph</span></h1>
               </div>
             </div>
           </div>

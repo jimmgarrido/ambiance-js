@@ -11,7 +11,9 @@
 // }
 
 body {
-  background: #eb4c42;
+  // background: #eb4c42;
+  background: #ED6A5A;
+  //night mode #29335C
 }
 
 .header {
@@ -48,11 +50,11 @@ body {
 .outdoor-temp {
   // margin-bottom: 40px;
   align-items: center;
-  background: #eb4c42;
+  // background: #eb4c42;
   border-bottom-left-radius: 100px;
   border-bottom-right-radius: 100px;
   justify-content: center;
-  text-align: center;
+  // text-align: center;
   padding: 50px;
   color: white;
 
@@ -216,4 +218,19 @@ body {
   grid-template-columns: auto auto;
   grid-template-rows: 1fr 1fr;
   margin-bottom: 15px;
+}
+
+.chart-item {  
+  border-radius: 10px;
+  box-shadow: 0 13px 27px -5px rgba(50,50,93,.25), 0 8px 16px -8px rgba(0,0,0,.3), 0 -6px 16px -6px rgba(0,0,0,.025);
+  background: #fef4f3;
+  color: #eb4c42;
+  margin: 10px 20px;
+  text-align: center;
+  padding: 20px 15px;
+
+  @media screen and (min-width: 1000px) {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
 }
