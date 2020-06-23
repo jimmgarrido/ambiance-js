@@ -1,8 +1,9 @@
-import React from 'react';
-import WeatherDetails from './components/WeatherDetails';
+import React from 'react'
+import WeatherDetails from './components/WeatherDetails'
 import HistoryChart from './components/HistoryChart'
-import './css/mini-default.css';
-import './css/App.scss';
+import TempHeader from './components/TempHeader'
+import './css/mini-default.css'
+import './css/App.scss'
 
 class App extends React.Component {
   constructor(props) {
@@ -28,18 +29,18 @@ class App extends React.Component {
   }
 
   getData() {
-    fetch('http://localhost:4000/api')
+    fetch('http://ambiserve.underdeveloper.com/api')
     .then((res) => {
       return res.json()
     })
     .then((data) => {
       this.setState({
-        weatherData: data.weatherData[0],
+        weatherData: data.weatherData[0].lastData,
         forecastData: data.forecastData
       })
     })
 
-    fetch('http://localhost:4000/api/history')
+    fetch('http://ambiserve.underdeveloper.com/api/history')
     .then((res) => {
       return res.json()
     })
@@ -58,8 +59,9 @@ class App extends React.Component {
         <div className="App">
           <div className="container">
             <main>
-              <WeatherDetails data={this.state.weatherData.lastData} forecast={this.state.forecastData.data} />
-              <HistoryChart data={this.state.historicalData} />
+              <TempHeader data={this.state.weatherData} forecast={this.state.forecastData.data} />
+              <WeatherDetails data={this.state.weatherData} />
+              <HistoryChart title={'Temperature'} data={this.state.historicalData} />
             </main>
           </div>
         </div>

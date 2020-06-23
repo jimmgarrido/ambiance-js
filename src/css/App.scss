@@ -44,7 +44,7 @@ body {
   // background: #eba142;
   // border-top-left-radius: 50px;
   // padding: 25px 25px;
-  color: #eb4c42;
+  color: #ED6A5A;
 }
 
 .outdoor-temp {
@@ -176,6 +176,7 @@ body {
     padding: 5px 15px;
     margin: 8px;
     font-size: 1.2rem;
+    // border: 2px solid #eb4c42;
   }
 
   @media screen and (max-width: 500px) {
@@ -228,9 +229,20 @@ body {
   margin: 10px 20px;
   text-align: center;
   padding: 20px 15px;
+  // position: relative;
+
+  h4 {
+    background: #eb4c42;
+    color: white;
+    border-radius: 30px;
+    padding: 5px 15px;
+    margin: 8px;
+    font-size: 1.2rem;
+    // border: 2px solid #eb4c42;
+  }
 
   @media screen and (min-width: 1000px) {
-    flex-basis: 50%;
-    max-width: 50%;
+    flex-basis: 66%;
+    max-width: 66%;
   }
 }

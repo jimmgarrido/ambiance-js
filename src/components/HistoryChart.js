@@ -33,21 +33,25 @@ class HistoryChart extends React.Component {
             data: {
                 datasets: [
                     {
+                        label: 'Outdoor',
                         data: this.outsideTemps,
                         fill: false,
                         borderColor: 'rgb(235,76,66)',
                         borderWidth: 2
                     },
                     {
-                        data: this.indoorTemps,
-                        fill: false,
-                        borderColor: 'rgba(66,235,161)',
-                        borderWidth: 2
-                    },
-                    {
+                        label: 'Dewpoint',
                         data: this.dewPoints,
                         fill: false,
                         borderColor: 'rgba(235,76,66,0.6)',
+                        borderWidth: 2,
+                        borderDash: [5,2]
+                    },
+                    {
+                        label: 'Indoor',
+                        data: this.indoorTemps,
+                        fill: false,
+                        borderColor: 'rgb(43,127,233)',
                         borderWidth: 2
                     }
                 ]
@@ -61,7 +65,11 @@ class HistoryChart extends React.Component {
                             stepSize: 120
                         }
                     }]
-                }
+                },
+                legend: {
+                    display: true
+                },
+                // responsive: true
             }
         });
     }
@@ -69,8 +77,9 @@ class HistoryChart extends React.Component {
     render() {
         return (
             <div className="row outdoor-details">
-                <div className="chart-item">
-                    <canvas ref={this.myChartCanvas} height="1001" width="1500"></canvas>
+                <div className="chart-item col-sm-3">
+                    <h4>{this.props.title}</h4>
+                    <canvas ref={this.myChartCanvas}></canvas>
                 </div>
             </div>
         )
