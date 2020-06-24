@@ -18,10 +18,10 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getData()
-    // this.refreshTimer = setInterval(
-    //   () => this.getData(),
-    //   60000
-    //   );
+    this.refreshTimer = setInterval(
+      () => this.getData(),
+      60000
+      );
   }
 
   componentWillUnmount() {
@@ -29,7 +29,7 @@ class App extends React.Component {
   }
 
   getData() {
-    fetch('http://ambiserve.underdeveloper.com/api')
+    fetch('/api')
     .then((res) => {
       return res.json()
     })
@@ -40,7 +40,7 @@ class App extends React.Component {
       })
     })
 
-    fetch('http://ambiserve.underdeveloper.com/api/history')
+    fetch('/api/history')
     .then((res) => {
       return res.json()
     })

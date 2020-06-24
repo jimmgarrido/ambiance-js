@@ -180,10 +180,10 @@ body {
   }
 
   @media screen and (max-width: 500px) {
-    flex-basis: 70%;
-    max-width: 70%;
+    flex-basis: 80%;
+    max-width: 80%;
 
-    h1{
+    h1 {
       margin-bottom: 15px;
     }
   }
@@ -244,5 +244,13 @@ body {
   @media screen and (min-width: 1000px) {
     flex-basis: 66%;
     max-width: 66%;
+  }
+  @media screen and (max-width: 500px) {
+    flex-basis: 75%;
+    max-width: 75%;
+  }
+  @media screen and (min-width: 960px) {
+    flex-basis: 33.33%;
+    max-width: 33.33%;
   }
 }
