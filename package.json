@@ -17,6 +17,7 @@
   "proxy": "http://localhost:4000",
   "scripts": {
     "start": "node server.js",
+    "react": "react-scripts start",
     "debug": "NODE_ENV=dev node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
