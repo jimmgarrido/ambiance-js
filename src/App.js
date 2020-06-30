@@ -1,9 +1,10 @@
 import React from 'react'
 import WeatherDetails from './components/WeatherDetails'
-import HistoryChart from './components/HistoryChart'
+import Almanac from './components/Almanac'
 import TempHeader from './components/TempHeader'
 import './css/mini-default.css'
 import './css/App.scss'
+import HistoryChart from './components/HistoryChart'
 
 class App extends React.Component {
   constructor(props) {
@@ -18,6 +19,8 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getData()
+    this.getHistoryData()
+
     this.refreshTimer = setInterval(
       () => this.getData(),
       60000
@@ -39,7 +42,9 @@ class App extends React.Component {
         forecastData: data.forecastData
       })
     })
+  }
 
+  getHistoryData() {
     fetch('/api/history')
     .then((res) => {
       return res.json()
@@ -52,21 +57,19 @@ class App extends React.Component {
   }
 
   render() {
-    if(this.state.weatherData == null) {
+    if(this.state.weatherData == null || this.state.historicalData == null) {
       return <p>Loading data...</p>
     } else {
       return (
         <div className="App">
-          <div className="container app-grid">
+          <div className="app-grid">
             <div className="row header">
               <TempHeader data={this.state.weatherData} forecast={this.state.forecastData.data} />
               <WeatherDetails data={this.state.weatherData} />
             </div>
             <div className="detail-wrapper">
-              <div className="row chart-wrapper">
-              <HistoryChart title={'Outdoor Temperature'} data={this.state.historicalData} />
-              <HistoryChart title={'Humidity'} data={this.state.historicalData} />
-              </div>
+              <Almanac data={this.state.historicalData} />
+              {/* <HistoryChart title={'Humidity'} data={this.state.historicalData} /> */}
             </div>
           </div>
         </div>

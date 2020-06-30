@@ -79,7 +79,7 @@ body {
   }
 }
 
-.indoor-temp {
+#indoor-temp {
   // margin-top: 0;
   grid-column: 2;
   grid-row: 3;
@@ -230,7 +230,7 @@ body {
   // box-shadow: 0 13px 27px -5px rgba(50,50,93,.25), 0 8px 16px -8px rgba(0,0,0,.3), 0 -6px 16px -6px rgba(0,0,0,.025);
   // background: #fef4f3;
   color: #eb4c42;
-  margin: 10px 20px;
+  // margin: 10px 20px;
   text-align: center;
   padding: 20px 15px;
   // position: relative;
@@ -246,6 +246,10 @@ body {
   }
 
   @media screen and (min-width: 1280px) {
+    flex-basis: 48%;
+    max-width: 48%;
+  }
+  @media screen and (min-width: 1400px) {
     flex-basis: 45%;
     max-width: 45%;
   }
@@ -271,5 +275,5 @@ body {
 }
 
 .chart-wrapper {
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
