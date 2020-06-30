@@ -57,12 +57,17 @@ class App extends React.Component {
     } else {
       return (
         <div className="App">
-          <div className="container">
-            <main>
+          <div className="container app-grid">
+            <div className="row header">
               <TempHeader data={this.state.weatherData} forecast={this.state.forecastData.data} />
               <WeatherDetails data={this.state.weatherData} />
-              <HistoryChart title={'Temperature'} data={this.state.historicalData} />
-            </main>
+            </div>
+            <div className="detail-wrapper">
+              <div className="row chart-wrapper">
+              <HistoryChart title={'Outdoor Temperature'} data={this.state.historicalData} />
+              <HistoryChart title={'Humidity'} data={this.state.historicalData} />
+              </div>
+            </div>
           </div>
         </div>
       );

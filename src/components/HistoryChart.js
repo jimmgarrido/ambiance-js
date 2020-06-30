@@ -17,6 +17,10 @@ class HistoryChart extends React.Component {
             return {x: new Date(z.dateutc * 1000), y: z.tempf}
         })
 
+        this.feelsLikeTemps = this.props.data.map(z => {
+            return {x: new Date(z.dateutc * 1000), y: z.feelslike}
+        })
+
         this.dewPoints = this.props.data.map(z => {
             return {x: new Date(z.dateutc * 1000), y: z.dewpoint}
         })
@@ -25,7 +29,9 @@ class HistoryChart extends React.Component {
             return {x: new Date(z.dateutc * 1000), y: z.tempinf}
         })
 
-        console.log(this.outsideTemps)
+        this.humidity = this.props.data.map(z => {
+            return {x: new Date(z.dateutc * 1000), y: z.humidity}
+        })
 
         //https://www.createwithdata.com/react-chartjs-dashboard/
         var myChart = new Chart(this.myChartCanvas.current, {
@@ -37,23 +43,26 @@ class HistoryChart extends React.Component {
                         data: this.outsideTemps,
                         fill: false,
                         borderColor: 'rgb(235,76,66)',
-                        borderWidth: 2
+                        // borderWidth: 2,
+                        yAxisID: 'temp-axis'
                     },
                     {
-                        label: 'Dewpoint',
-                        data: this.dewPoints,
+                        label: 'Feels Like',
+                        data: this.feelsLikeTemps,
                         fill: false,
-                        borderColor: 'rgba(235,76,66,0.6)',
+                        borderColor: 'rgba(235,76,66,.6)',
                         borderWidth: 2,
-                        borderDash: [5,2]
+                        yAxisID: 'temp-axis'
                     },
-                    {
-                        label: 'Indoor',
-                        data: this.indoorTemps,
-                        fill: false,
-                        borderColor: 'rgb(43,127,233)',
-                        borderWidth: 2
-                    }
+                    // {
+                    //     label: 'Humidity',
+                    //     data: this.humidity,
+                    //     fill: false,
+                    //     borderColor: 'rgba(43,127,233,.7)',
+                    //     borderWidth: 2,
+                    //     borderDash: [5,2],
+                    //     yAxisID: 'humidity-axis'
+                    // }
                 ]
             },
             options: {
@@ -62,7 +71,40 @@ class HistoryChart extends React.Component {
                         type: 'time',
                         time: {
                             unit: 'minute',
-                            stepSize: 120
+                            stepSize: 120,
+                            displayFormats: {
+                                minute: 'H:mm'
+                            }
+                        }
+                    }],
+                    yAxes: [
+                    //     {
+                    //     id: 'humidity-axis',
+                    //     type: 'linear',
+                    //     position: 'left',
+                    //     scaleLabel: {
+                    //         display: true,
+                    //         labelString: 'Humidity'
+                    //     },
+                    //     ticks: {
+                    //         max: 100,
+                    //         min: 0,
+                    //         callback: function(value, index, values) {
+                    //             return value + '%'
+                    //         }
+                    //     },
+                    //     gridLines: {
+                    //         drawOnChartArea: false
+                    //     }
+                    // }, 
+                    {
+                        id: 'temp-axis',
+                        type: 'linear',
+                        position: 'right',
+                        ticks: {
+                            callback: function(value, index, values) {
+                                return value + '°'
+                            }
                         }
                     }]
                 },
@@ -76,11 +118,9 @@ class HistoryChart extends React.Component {
 
     render() {
         return (
-            <div className="row outdoor-details">
-                <div className="chart-item col-sm-3">
-                    <h4>{this.props.title}</h4>
-                    <canvas ref={this.myChartCanvas}></canvas>
-                </div>
+            <div className="chart-item col-sm-3 col-md-5">
+                <h4>{this.props.title}</h4>
+                <canvas ref={this.myChartCanvas}></canvas>
             </div>
         )
     }

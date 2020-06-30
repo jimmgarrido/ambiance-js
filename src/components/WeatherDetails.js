@@ -45,34 +45,27 @@ class WeatherDetails extends React.Component {
 
   render() {
     return (
-    <div>
-        <div>
-          <div className="wrapper-2">
-            <div className="row outdoor-details">
-              {/* <div className="col-sm-2 glance-items">
-                <h2>Glance</h2>
-              </div> */}
-              <div className="col-sm-6 col-md-5 col-lg-3 glance-item">
-                <h4>Humidity</h4>
-                <h1>{this.props.data.humidity}%</h1>
-                <h4>Dew point</h4>
-                <h1>{parseFloat(this.props.data.dewPoint).toFixed(1)}°</h1>
-              </div>
-              <div className="col-sm-6 col-md-5 col-lg-3 glance-item">
-                <h4>Feels Like</h4>
-                <h1>{parseFloat(this.props.data.feelsLike).toFixed(1)}°</h1>
-                <h4>UV Index</h4>
-                <h1>{this.props.data.uv} {this.getUVindexRating(this.props.data.uv)}</h1>
-              </div>
-              <div className="col-sm-6 col-md-5 col-lg-3 glance-item">
-                <h4>Wind Speed</h4>
-                <h1>{this.props.data.windspeedmph} <span className="minor-label">mph</span> {this.getWindCardinalDir(this.props.data.winddir)}</h1>
-                <h4>Gust</h4>
-                <h1>{this.props.data.windgustmph} <span className="minor-label">mph</span></h1>
-              </div>
-            </div>
-          </div>
-        </div> 
+      <div className="col-sm-12 col-md-7">
+        <div className="row item-box">
+        <div className="col-sm-6 col-md-5 col-lg-3 glance-item">
+          <h4>Humidity</h4>
+          <h1>{this.props.data.humidity}%</h1>
+          <h4>Dew point</h4>
+          <h1>{parseFloat(this.props.data.dewPoint).toFixed(1)}°</h1>
+        </div>
+        <div className="col-sm-6 col-md-5 col-lg-3 glance-item">
+          <h4>Feels Like</h4>
+          <h1>{parseFloat(this.props.data.feelsLike).toFixed(1)}°</h1>
+          <h4>UV Index</h4>
+          <h1>{this.props.data.uv} {this.getUVindexRating(this.props.data.uv)}</h1>
+        </div>
+        <div className="col-sm-6 col-md-5 col-lg-3 glance-item">
+          <h4>Wind Speed</h4>
+          <h1>{this.props.data.windspeedmph} <span className="minor-label">mph</span> {this.getWindCardinalDir(this.props.data.winddir)}</h1>
+          <h4>Gust</h4>
+          <h1>{this.props.data.windgustmph} <span className="minor-label">mph</span></h1>
+        </div>
+        </div>
       </div>
     );
   }
