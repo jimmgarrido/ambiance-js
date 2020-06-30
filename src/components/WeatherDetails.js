@@ -1,4 +1,5 @@
 import React from 'react'
+import DetailItem from './DetailItem';
 
 class WeatherDetails extends React.Component {
   constructor(props) {
@@ -45,26 +46,14 @@ class WeatherDetails extends React.Component {
 
   render() {
     return (
-      <div className="col-sm-12 col-md-7">
+      <div className="col-sm-12 col-lg-7">
         <div className="row item-box">
-        <div className="col-sm-6 col-md-5 col-lg-3 glance-item">
-          <h4>Humidity</h4>
-          <h1>{this.props.data.humidity}%</h1>
-          <h4>Dew point</h4>
-          <h1>{parseFloat(this.props.data.dewPoint).toFixed(1)}°</h1>
-        </div>
-        <div className="col-sm-6 col-md-5 col-lg-3 glance-item">
-          <h4>Feels Like</h4>
-          <h1>{parseFloat(this.props.data.feelsLike).toFixed(1)}°</h1>
-          <h4>UV Index</h4>
-          <h1>{this.props.data.uv} {this.getUVindexRating(this.props.data.uv)}</h1>
-        </div>
-        <div className="col-sm-6 col-md-5 col-lg-3 glance-item">
-          <h4>Wind Speed</h4>
-          <h1>{this.props.data.windspeedmph} <span className="minor-label">mph</span> {this.getWindCardinalDir(this.props.data.winddir)}</h1>
-          <h4>Gust</h4>
-          <h1>{this.props.data.windgustmph} <span className="minor-label">mph</span></h1>
-        </div>
+          <DetailItem label='Humidity' data={this.props.data.humidity + '%'} />
+          <DetailItem label='Dew Point' data={parseFloat(this.props.data.dewPoint).toFixed(1) + '°'} />
+          <DetailItem label='Feels Like' data={parseFloat(this.props.data.feelsLike).toFixed(1) + '°'} />
+          <DetailItem label='UV Index' data={this.props.data.uv + ' ' + this.getUVindexRating(this.props.data.uv)} />
+          <DetailItem label='Wind Speed' data={this.props.data.windspeedmph + 'mph' + ' ' + this.getWindCardinalDir(this.props.data.winddir)} />
+          <DetailItem label='Gust' data={this.props.data.windgustmph + 'mph' + ' ' + this.getWindCardinalDir(this.props.data.winddir)} />
         </div>
       </div>
     );

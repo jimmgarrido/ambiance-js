@@ -10,7 +10,7 @@ class TempChart extends React.Component {
         console.log('temp')
         console.log(this.props.data)
         return (
-            <div className="chart-item col-sm-3 col-md-5">
+            <div className="chart-item col-sm-12 col-md-5">
                 <h4>{this.props.title}</h4>
                 <HistoryChart data={this.props.data} />
             </div>

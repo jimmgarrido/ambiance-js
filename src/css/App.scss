@@ -19,6 +19,10 @@ body {
 .header {
   margin: 50px 60px;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    margin: 30px 10px;
+  }
 }
 
 .Date-header {
@@ -90,6 +94,11 @@ body {
   // padding: 4px 25px;
   font-size: 2rem;
   margin: 0 8px;
+
+  @media screen and (max-width: 1280px) {
+    justify-self: center;
+    grid-column: 2 / 4;
+  }
 }
 
 .outdoor-temp-flex {

@@ -69,7 +69,6 @@ class App extends React.Component {
             </div>
             <div className="detail-wrapper">
               <Almanac data={this.state.historicalData} />
-              {/* <HistoryChart title={'Humidity'} data={this.state.historicalData} /> */}
             </div>
           </div>
         </div>

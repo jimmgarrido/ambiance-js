@@ -8,7 +8,7 @@ class TempHeader extends React.Component {
 
     render() {
         return (
-          <div className="col-sm-12 col-md-4">
+          <div className="col-sm-12 col-lg-5">
             <div className="outdoor-temp-grid outdoor-temp">
               <h1>{this.props.data.tempf}°</h1>   
               <h2 id="forecast-high">↑ {parseInt(this.props.forecast.daily.data[0].temperatureHigh)}°</h2>
