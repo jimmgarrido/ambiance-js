@@ -236,10 +236,10 @@ body {
 
 .chart-item {  
   border-radius: 10px;
-  // box-shadow: 0 13px 27px -5px rgba(50,50,93,.25), 0 8px 16px -8px rgba(0,0,0,.3), 0 -6px 16px -6px rgba(0,0,0,.025);
-  // background: #fef4f3;
+  box-shadow: 0 13px 27px -5px rgba(50,50,93,.25), 0 8px 16px -8px rgba(0,0,0,.3), 0 -6px 16px -6px rgba(0,0,0,.025);
+  background: white;
   color: #eb4c42;
-  // margin: 10px 20px;
+  margin-bottom: 20px;
   text-align: center;
   padding: 20px 15px;
   // position: relative;

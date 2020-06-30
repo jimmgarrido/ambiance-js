@@ -46,7 +46,7 @@ class WeatherDetails extends React.Component {
 
   render() {
     return (
-      <div className="col-sm-12 col-lg-7">
+      <div className="col-sm-12 col-lg-7 col-lg-offset-1">
         <div className="row item-box">
           <DetailItem label='Humidity' data={this.props.data.humidity + '%'} />
           <DetailItem label='Dew Point' data={parseFloat(this.props.data.dewPoint).toFixed(1) + '°'} />

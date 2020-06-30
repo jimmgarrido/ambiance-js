@@ -67,9 +67,7 @@ class App extends React.Component {
               <TempHeader data={this.state.weatherData} forecast={this.state.forecastData.data} />
               <WeatherDetails data={this.state.weatherData} />
             </div>
-            <div className="detail-wrapper">
-              <Almanac data={this.state.historicalData} />
-            </div>
+            <Almanac data={this.state.historicalData} />
           </div>
         </div>
       );
