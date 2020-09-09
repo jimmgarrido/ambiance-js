@@ -65,8 +65,8 @@ class App extends React.Component {
           <div className="app-grid">
             <div className="row header">
               <TempHeader data={this.state.weatherData} forecast={this.state.forecastData.data} />
-              <WeatherDetails data={this.state.weatherData} />
             </div>
+            <WeatherDetails data={this.state.weatherData} />
             <Almanac data={this.state.historicalData} />
           </div>
         </div>

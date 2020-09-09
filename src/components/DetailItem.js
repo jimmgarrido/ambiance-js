@@ -7,8 +7,9 @@ class DetailItem extends React.Component {
 
     render() {
         return (
-            <div className="col-sm-6 col-md-4 glance-item">
-                <h4>{this.props.label}</h4>
+            <div className="col-sm-6 col-md-3 glance-item">
+                {/* <h4>{this.props.label}</h4> */}
+                <h4>{this.props.label}</h4> 
                 <h1>{this.props.data}</h1>
             </div>
         )
