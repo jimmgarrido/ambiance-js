@@ -25,7 +25,7 @@ const db = new Database(dbPath);
 https://medium.com/jeremy-gottfrieds-tech-blog/tutorial-how-to-deploy-a-production-react-app-to-heroku-c4831dfcfa08
 app.use(express.static(buildPath));
 
-app.get('/api', async (req, res) => {
+app.get('/api/current', async (req, res) => {
     let requestURL = `https://api.ambientweather.net/v1/devices?applicationKey=${process.env.AMBIENT_APP_KEY}&apiKey=${process.env.AMBIENT_API_KEY}`
 
     try {
@@ -33,14 +33,24 @@ app.get('/api', async (req, res) => {
             requestURL)
             .json();
         
-        var endDate = Date.now() - 86400000;
+        var endTime = Date.now() - 86400000;
+
+        var lastDayData = getHistory(endTime, 288);
+        var tempDiff = ambientWeatherData[0].lastData.tempf - lastDayData[0].tempf;
+
+        var tempArray = [];
+
+        for(i=lastDayData.length - 11; i<lastDayData.length; i++) {
+            tempArray.push(lastDayData[i].tempf);
+        }
 
         if(forecastJson == '')
             updateForecastData();
 
         let response = {
             weatherData : ambientWeatherData, 
-            forecastData: forecastJson
+            forecastData : forecastJson,
+            lastDay : tempDiff
         }
 
         res.json(response);
@@ -50,8 +60,8 @@ app.get('/api', async (req, res) => {
 });
 
 app.get('/api/history', async (req, res) => {
-    var time = (Date.now() / 1000) - 86400;
-    let prevData = getHistory(time);
+    var endTime = (Date.now()) - 108000000;
+    let prevData = getHistory(endTime, 360);
 
     let response = {
         data : prevData
@@ -213,9 +223,9 @@ async function updateHistoryData() {
     insertData(data);
 }
 
-function getHistory(endTime) {
-    let query = db.prepare(`SELECT * FROM minutedata WHERE dateutc >= ?`);
-    let entries = query.all(endTime);
+function getHistory(endTime, limit = 288) {
+    let query = db.prepare(`SELECT * FROM minutedata WHERE dateutc >= ? LIMIT ?`);
+    let entries = query.all(endTime / 1000, limit) ;
     // console.log(entries);
     return entries;
 }

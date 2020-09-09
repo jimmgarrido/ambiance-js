@@ -32,7 +32,7 @@ class App extends React.Component {
   }
 
   getData() {
-    fetch('/api')
+    fetch('/api/current')
     .then((res) => {
       return res.json()
     })
