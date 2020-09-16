@@ -50,6 +50,9 @@ class HistoryChart extends React.Component {
                             displayFormats: {
                                 minute: 'H:mm'
                             }
+                        },
+                        gridLines: {
+                            display: false
                         }
                     }],
                     yAxes: [
@@ -93,7 +96,9 @@ class HistoryChart extends React.Component {
     render() {
         return (
             <div>
-                <canvas ref={this.myChartCanvas}></canvas>
+                <div>
+                    <canvas ref={this.myChartCanvas}></canvas>
+                </div>
             </div>
         )
     }

@@ -271,12 +271,12 @@ body {
 
 .chart-item {  
   border-radius: 10px;
-  box-shadow: 0 13px 27px -5px rgba(50,50,93,.25), 0 8px 16px -8px rgba(0,0,0,.3), 0 -6px 16px -6px rgba(0,0,0,.025);
+  // box-shadow: 0 13px 27px -5px rgba(50,50,93,.25), 0 8px 16px -8px rgba(0,0,0,.3), 0 -6px 16px -6px rgba(0,0,0,.025);
   background: white;
   color: #eb4c42;
   margin-bottom: 20px;
   text-align: center;
-  padding: 20px 15px;
+  // padding: 20px 15px;
   // position: relative;
 
   h4 {
@@ -289,14 +289,14 @@ body {
     // border: 2px solid #eb4c42;
   }
 
-  @media screen and (min-width: 1280px) {
-    flex-basis: 48%;
-    max-width: 48%;
-  }
-  @media screen and (min-width: 1400px) {
-    flex-basis: 45%;
-    max-width: 45%;
-  }
+  // @media screen and (min-width: 1280px) {
+  //   flex-basis: 48%;
+  //   max-width: 48%;
+  // }
+  // @media screen and (min-width: 1400px) {
+  //   flex-basis: 45%;
+  //   max-width: 45%;
+  // }
   // @media screen and (max-width: 500px) {
   //   flex-basis: 75%;
   //   max-width: 75%;
@@ -318,6 +318,20 @@ body {
   grid-template-rows: auto 1fr;
 }
 
-.chart-wrapper {
-  justify-content: space-evenly;
+.almanac-container {
+  background-color: white;
+
+  h2 {
+    background: #ED6A5A;
+    color: white;
+    padding: 5px 15px;
+    // margin: 8px 0;
+    // font-size: 1.3rem;
+  }
+}
+
+.chart-container {
+  position: relative; 
+  width:100vw;
+  height: 100vh;
 }

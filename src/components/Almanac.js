@@ -43,14 +43,14 @@ class Almanac extends React.Component {
             label: 'Dew Point',
             data: this.dewPointTemps,
             fill: false,
-            borderColor: 'rgb(66, 225, 235)'
+            borderColor: 'rgb(66, 235, 161)'
         }]
 
         this.indoorTempData = [{
             label: 'Indoor',
             data: this.indoorTemps,
             fill: false,
-            borderColor: 'rgb(66, 235, 161)'
+            borderColor: 'rgb(235,76,66)'
         }]
     }
 
@@ -64,12 +64,30 @@ class Almanac extends React.Component {
 
     render() {
         if(this.outdoorTempData != null) {
-            console.log('alamanac')
             return (
-                <div className="row chart-wrapper">
-                    <TempChart title='Outdoor Temperature' data={this.outdoorTempData} />
+                <div className="almanac-container">
+                    <h1>Details</h1>
+                    <div>
+                        <h2>Temperature</h2>
+                        <div className="row">
+                            <div className="col-sm-2">
+                                <h4>24hr Change</h4>
+                                <h3>-8.7°</h3>
+                            </div>
+                            <div className="col-sm-2">
+                                <h4>Highest Temp</h4>
+                                <h3>108.7°</h3>
+                            </div>
+                            <div className="col-sm-2">
+                                <h4>Lowest Temp</h4>
+                                <h3>68.7°</h3>
+                            </div>
+                            <div className="col-sm-6">
+                            <TempChart title='Outdoor Temperature' data={this.outdoorTempData} />
+                            </div>
+                        </div>
+                    </div>
                     <TempChart title='Indoor Temperature' data={this.indoorTempData} />
-                    <TempChart title='Outdoor Temperature' data={this.outdoorTempData} />
                 </div>
             )
         } else {
