@@ -65,29 +65,36 @@ class Almanac extends React.Component {
     render() {
         if(this.outdoorTempData != null) {
             return (
-                <div className="almanac-container">
-                    <h1>Details</h1>
-                    <div>
-                        <h2>Temperature</h2>
-                        <div className="row">
-                            <div className="col-sm-2">
-                                <h4>24hr Change</h4>
-                                <h3>-8.7°</h3>
-                            </div>
-                            <div className="col-sm-2">
-                                <h4>Highest Temp</h4>
-                                <h3>108.7°</h3>
-                            </div>
-                            <div className="col-sm-2">
-                                <h4>Lowest Temp</h4>
-                                <h3>68.7°</h3>
-                            </div>
-                            <div className="col-sm-6">
-                            <TempChart title='Outdoor Temperature' data={this.outdoorTempData} />
+                <div className="almanac-container row">
+                    <div className="col-sm-12">
+                    <h1 className="section-title col-sm-10 col-sm-offset-1">Temperature</h1>
+                    <div className="row">
+                        <div className="col-sm-10 col-sm-offset-1 col-md-5">
+                            <div className="row">
+                                <div className="col-sm-6">
+                                    <h4>24hr Change</h4>
+                                    <h3>{parseFloat(this.props.lastDay.tempDiff).toFixed(1)}°</h3>
+                                </div>
+                                <div className="col-sm-6">
+                                    <h4>Daily Avg</h4>
+                                    <h3>{parseFloat(this.props.lastDay.avgTemp).toFixed(1)}°</h3>
+                                </div>
+                                <div className="col-sm-6">
+                                    <h4>Daily High</h4>
+                                    <h3>{parseFloat(this.props.lastDay.maxTemp).toFixed(1)}°</h3>
+                                </div>
+                                <div className="col-sm-6">
+                                    <h4>Daily Low</h4>
+                                    <h3>{parseFloat(this.props.lastDay.minTemp).toFixed(1)}°</h3>
+                                </div>
                             </div>
                         </div>
+                        <div className="col-sm-12 col-md-5">
+                            <TempChart title='Outdoor Temperature' data={this.outdoorTempData} />
+                        </div>
                     </div>
-                    <TempChart title='Indoor Temperature' data={this.indoorTempData} />
+                    {/* <TempChart title='Indoor Temperature' data={this.indoorTempData} /> */}
+                </div>
                 </div>
             )
         } else {

@@ -34,15 +34,26 @@ app.get('/api/current', async (req, res) => {
             .json();
         
         var endTime = Date.now() - 86400000;
+        var today = new Date();
+        today.setHours(0,0,0);
+        var todayStart = today.getTime() / 1000;
 
         var lastDayData = getHistory(endTime, 288);
         var tempDiff = ambientWeatherData[0].lastData.tempf - lastDayData[0].tempf;
 
         var tempArray = [];
+        lastDayData.forEach(d => {
+            if(d.dateutc >= todayStart) {
+                tempArray.push(d.tempf);
+            }
+        })
 
-        for(i=lastDayData.length - 11; i<lastDayData.length; i++) {
-            tempArray.push(lastDayData[i].tempf);
-        }
+        var maxTemp = Math.max(...tempArray);
+        var minTemp = Math.min(...tempArray);
+        var avgTemp = tempArray.reduce((a, b) => a + b) / tempArray.length;
+
+        console.log(today.getTime());
+        console.log(tempArray);
 
         if(forecastJson == '')
             updateForecastData();
@@ -50,7 +61,12 @@ app.get('/api/current', async (req, res) => {
         let response = {
             weatherData : ambientWeatherData, 
             forecastData : forecastJson,
-            lastDay : tempDiff
+            lastDay : { 
+                "tempDiff" : tempDiff,
+                "maxTemp" : maxTemp,
+                "minTemp" : minTemp,
+                "avgTemp" : avgTemp
+            }
         }
 
         res.json(response);
@@ -60,8 +76,8 @@ app.get('/api/current', async (req, res) => {
 });
 
 app.get('/api/history', async (req, res) => {
-    var endTime = (Date.now()) - 108000000;
-    let prevData = getHistory(endTime, 360);
+    var endTime = (Date.now()) - 86400000;
+    let prevData = getHistory(endTime, 288);
 
     let response = {
         data : prevData

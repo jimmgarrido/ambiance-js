@@ -86,9 +86,15 @@ class HistoryChart extends React.Component {
                     }]
                 },
                 legend: {
-                    display: true
+                    display: true,
+                    labels: {
+                        boxWidth: 15
+                    }
                 },
-                // responsive: true
+                layout: {
+                    padding: 10
+                },
+                maintainAspectRatio: false
             }
         });
     }
@@ -96,7 +102,7 @@ class HistoryChart extends React.Component {
     render() {
         return (
             <div>
-                <div>
+                <div className="chart-container">
                     <canvas ref={this.myChartCanvas}></canvas>
                 </div>
             </div>

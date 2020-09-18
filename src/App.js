@@ -12,6 +12,7 @@ class App extends React.Component {
     this.state = {
       weatherData : null,
       forecastData: null,
+      lastDayData : null,
       historicalData : null
     }
     this.refreshCount = 0
@@ -38,8 +39,9 @@ class App extends React.Component {
     })
     .then((data) => {
       this.setState({
-        weatherData: data.weatherData[0].lastData,
-        forecastData: data.forecastData
+        weatherData : data.weatherData[0].lastData,
+        forecastData : data.forecastData,
+        lastDayData : data.lastDay
       })
     })
   }
@@ -67,7 +69,7 @@ class App extends React.Component {
               <TempHeader data={this.state.weatherData} forecast={this.state.forecastData.data} />
             </div>
             <WeatherDetails data={this.state.weatherData} />
-            <Almanac data={this.state.historicalData} />
+            <Almanac lastDay={this.state.lastDayData} data={this.state.historicalData} />
           </div>
         </div>
       );
