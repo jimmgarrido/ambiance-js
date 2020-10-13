@@ -52,8 +52,9 @@ app.get('/api/current', async (req, res) => {
         var minTemp = Math.min(...tempArray);
         var avgTemp = tempArray.reduce((a, b) => a + b) / tempArray.length;
 
-        console.log(today.getTime());
-        console.log(tempArray);
+        // console.log('todayStart: ' + today.getTime());
+        // console.log('endDate: ' + endTime);
+        // console.log(tempArray);
 
         if(forecastJson == '')
             updateForecastData();

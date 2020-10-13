@@ -69,7 +69,7 @@ class App extends React.Component {
               <TempHeader data={this.state.weatherData} forecast={this.state.forecastData.data} />
             </div>
             <WeatherDetails data={this.state.weatherData} />
-            <Almanac lastDay={this.state.lastDayData} data={this.state.historicalData} />
+            <Almanac weatherData={this.state.weatherData} lastDay={this.state.lastDayData} data={this.state.historicalData} />
           </div>
         </div>
       );

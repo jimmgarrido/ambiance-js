@@ -30,7 +30,8 @@ class Almanac extends React.Component {
             label: 'Outdoor',
             data: this.outdoorTemps,
             fill: false,
-            borderColor: 'rgb(235,76,66)'
+            borderColor: 'rgb(235,76,66)',
+            borderWidth: 2
         },
         {
             label: 'Feels Like',
@@ -43,14 +44,17 @@ class Almanac extends React.Component {
             label: 'Dew Point',
             data: this.dewPointTemps,
             fill: false,
-            borderColor: 'rgb(66, 235, 161)'
-        }]
+            borderColor: 'rgb(66, 235, 161)',
+            borderWidth: 2
+        }
+    ]
 
         this.indoorTempData = [{
             label: 'Indoor',
             data: this.indoorTemps,
             fill: false,
-            borderColor: 'rgb(235,76,66)'
+            borderColor: 'rgb(235,76,66)',
+            borderWidth: 2
         }]
     }
 
@@ -67,34 +71,53 @@ class Almanac extends React.Component {
             return (
                 <div className="almanac-container row">
                     <div className="col-sm-12">
-                    <h1 className="section-title col-sm-10 col-sm-offset-1">Temperature</h1>
-                    <div className="row">
-                        <div className="col-sm-10 col-sm-offset-1 col-md-5">
-                            <div className="row">
-                                <div className="col-sm-6">
-                                    <h4>24hr Change</h4>
-                                    <h3>{parseFloat(this.props.lastDay.tempDiff).toFixed(1)}°</h3>
-                                </div>
-                                <div className="col-sm-6">
-                                    <h4>Daily Avg</h4>
-                                    <h3>{parseFloat(this.props.lastDay.avgTemp).toFixed(1)}°</h3>
-                                </div>
-                                <div className="col-sm-6">
-                                    <h4>Daily High</h4>
-                                    <h3>{parseFloat(this.props.lastDay.maxTemp).toFixed(1)}°</h3>
-                                </div>
-                                <div className="col-sm-6">
-                                    <h4>Daily Low</h4>
-                                    <h3>{parseFloat(this.props.lastDay.minTemp).toFixed(1)}°</h3>
+                        <h1 className="section-title col-sm-10 col-sm-offset-1">Temperature</h1>
+                        <div className="row">
+                            <div className="col-sm-10 col-sm-offset-1">
+                                <div className="row">
+                                    <div className="col-sm-6 col-md-3">
+                                        <h4>24hr Change</h4>
+                                        <h3>{parseFloat(this.props.lastDay.tempDiff).toFixed(1)}°</h3>
+                                    </div>
+                                    <div className="col-sm-6 col-md-3">
+                                        <h4>Daily Avg</h4>
+                                        <h3>{parseFloat(this.props.lastDay.avgTemp).toFixed(1)}°</h3>
+                                    </div>
+                                    <div className="col-sm-6 col-md-3">
+                                        <h4>Daily High</h4>
+                                        <h3>{parseFloat(this.props.lastDay.maxTemp).toFixed(1)}°</h3>
+                                    </div>
+                                    <div className="col-sm-6 col-md-3">
+                                        <h4>Daily Low</h4>
+                                        <h3>{parseFloat(this.props.lastDay.minTemp).toFixed(1)}°</h3>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-sm-12 col-md-5">
-                            <TempChart title='Outdoor Temperature' data={this.outdoorTempData} />
+                            <div className="col-sm-12 col-md-offset-1 col-md-11">
+                                <TempChart title='Outdoor Temperature' data={this.outdoorTempData} />
+                            </div>
                         </div>
                     </div>
-                    {/* <TempChart title='Indoor Temperature' data={this.indoorTempData} /> */}
-                </div>
+                    <div className="col-sm-12">
+                        <h1 className="section-title col-sm-10 col-sm-offset-1">Indoor</h1>
+                        <div className="row">
+                            <div className="col-sm-10 col-sm-offset-1">
+                                <div className="row">
+                                    <div className="col-sm-6 col-md-3">
+                                        <h4>Temperature</h4>
+                                        <h3>{parseFloat(this.props.weatherData.tempinf).toFixed(1)}°</h3>
+                                    </div>
+                                    <div className="col-sm-6 col-md-3">
+                                        <h4>Humidity</h4>
+                                        <h3>{parseInt(this.props.weatherData.humidityin)}%</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-sm-12 col-md-offset-1 col-md-11">
+                                <TempChart title='Indoor Temperature' data={this.indoorTempData} />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             )
         } else {

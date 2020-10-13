@@ -46,14 +46,15 @@ class WeatherDetails extends React.Component {
 
   render() {
     return (
-      <div id="item-box" className="col-sm-10 col-sm-offset-1">
-        <div className="row">
+      <div className="col-sm-10 col-sm-offset-1">
+        <div id="item-box" className="row">
           {/* <DetailItem label='Inside' data={parseFloat(this.props.data.tempinf).toFixed(1) + '°'} /> */}
           <DetailItem label='Dew Point' data={parseFloat(this.props.data.dewPoint).toFixed(1) + '°'} />
           <DetailItem label='Humidity' data={this.props.data.humidity + '%'} />
           <DetailItem label='UV Index' data={this.getUVindexRating(this.props.data.uv)} />
+          {/* <DetailItem label='Inside' data={parseFloat(this.props.data.tempinf).toFixed(1) + '°'} /> */}
           <DetailItem label='Wind' data={this.props.data.windspeedmph + 'mph' + ' ' + this.getWindCardinalDir(this.props.data.winddir)} />
-          {/* <DetailItem label='Gust' data={this.props.data.windgustmph + 'mph' + ' ' + this.getWindCardinalDir(this.props.data.winddir)} /> */}
+          {/* <DetailItem label='Rain' data={this.props.data.dailyrainin + 'in'} /> */}
         </div>
       </div>
     );

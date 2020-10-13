@@ -31,7 +31,7 @@ body {
   align-items: center;
 
   @media screen and (max-width: 768px) {
-    margin: 30px 10px;
+    margin: 30px 10px 10px;
   }
 }
 
@@ -174,13 +174,13 @@ body {
   // margin: 60px 20px;
   // text-align: center;
   padding: 20px 15px;
-  justify-content: space-around;
+  justify-content: space-evenly;
 
-  @media screen and (min-width: 1400px) {
-    flex-basis: 66.66667%;
-    max-width: 66.66667%;
-    margin-left: 16.66667%;
-  }
+  // @media screen and (min-width: 1400px) {
+  //   flex-basis: 66.66667%;
+  //   max-width: 66.66667%;
+  //   margin-left: 16.66667%;
+  // }
 }
 
 .glance-item {
@@ -194,7 +194,7 @@ body {
   // padding: 20px 15px;
 
   h1 {
-    font-size: 2.6rem;
+    font-size: 2.2rem;
     font-weight: 600;
     margin: 0;
     // margin-bottom: 30px;
@@ -351,20 +351,20 @@ body {
 
 .chart-container {
   position: relative; 
-  width:48vw;
-  height: 31vh;
+  width:80vw;
+  height: 35vh;
 
-  @media screen and (max-width: 1366px) {
-    position: relative; 
-    width:43vw;
-    height: 22vh;
-  }
+  // @media screen and (max-width: 1366px) {
+  //   position: relative; 
+  //   width:80vw;
+  //   height: 35vh;
+  // }
 
-  @media screen and (max-width: 1024px) {
-    position: relative; 
-    width:43vw;
-    height: 28vh;
-  }
+  // @media screen and (max-width: 1024px) {
+  //   position: relative; 
+  //   width:43vw;
+  //   height: 28vh;
+  // }
 
   @media screen and (max-width: 500px) {
     position: relative; 
