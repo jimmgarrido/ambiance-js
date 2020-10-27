@@ -16,13 +16,13 @@ let corsOptions = {
 };
 
 let forecastJson = '';
-let oldData = '';
+let isHotterOutside = false;
 
 const db = new Database(dbPath);
 
 // app.use(cors(corsOptions));
 
-https://medium.com/jeremy-gottfrieds-tech-blog/tutorial-how-to-deploy-a-production-react-app-to-heroku-c4831dfcfa08
+//https://medium.com/jeremy-gottfrieds-tech-blog/tutorial-how-to-deploy-a-production-react-app-to-heroku-c4831dfcfa08
 app.use(express.static(buildPath));
 
 app.get('/api/current', async (req, res) => {
@@ -230,14 +230,47 @@ function insertData(historicalData)
 
 async function updateHistoryData() {
     let lastEntry = db.prepare(`SELECT max(dateutc) AS timestamp FROM minutedata`).get();
-    let currentTime = Date.now();
     let lastTimestamp = lastEntry.timestamp * 1000;
-    let timeDiff = currentTime - lastTimestamp;
+
+    let timeDiff = Date.now() - lastTimestamp;
     let limit = Math.floor(timeDiff / 300000);
     
     let data = await getHistoricalData(Date.now(), limit);
     
     insertData(data);
+
+    compareValues();
+}
+
+async function compareValues() {
+    let entry = db.prepare(`SELECT * FROM minutedata WHERE dateutc=(SELECT max(dateutc) FROM minutedata)`).get();
+
+    let message = '';
+
+    if(!isHotterOutside && entry.tempf > entry.tempinf) {
+        message = `It's hotter outside (${entry.tempf}°) than inside (${entry.tempinf}°)!`;
+        isHotterOutside = true;
+    } else if (isHotterOutside && entry.tempf < entry.tempinf) {
+        message = `It's cooler outside (${entry.tempf}°) than inside (${entry.tempinf}°)!`;
+        isHotterOutside = false;
+    }
+
+    if(message != '') {
+        let notification = {
+            "token" : `${process.env.PUSHOVER_APP_TOKEN}`,
+            "user" : `${process.env.PUSHOVER_USER_KEY}`,
+            "message" : message
+        };
+
+        try {
+            let post = 
+            await got.post('https://api.pushover.net/1/messages.json', {
+                json: notification
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }  
 }
 
 function getHistory(endTime, limit = 288) {
