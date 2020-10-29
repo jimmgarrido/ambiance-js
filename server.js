@@ -267,8 +267,10 @@ async function compareValues() {
             await got.post('https://api.pushover.net/1/messages.json', {
                 json: notification
             });
+
+            console.log(post.body);
         } catch (error) {
-            console.log(error);
+            console.log("**********\n" + error);
         }
     }  
 }
