@@ -15,10 +15,12 @@ let corsOptions = {
     origin : '*'
 };
 
+let stationJson = '';
 let forecastJson = '';
 let isHotterOutside = false;
 
 const db = new Database(dbPath);
+const requestURL = `https://api.ambientweather.net/v1/devices?applicationKey=${process.env.AMBIENT_APP_KEY}&apiKey=${process.env.AMBIENT_API_KEY}`;
 
 // app.use(cors(corsOptions));
 
@@ -26,54 +28,44 @@ const db = new Database(dbPath);
 app.use(express.static(buildPath));
 
 app.get('/api/current', async (req, res) => {
-    let requestURL = `https://api.ambientweather.net/v1/devices?applicationKey=${process.env.AMBIENT_APP_KEY}&apiKey=${process.env.AMBIENT_API_KEY}`
+    var endTime = Date.now() - 86400000;
+    var today = new Date();
+    today.setHours(0,0,0);
+    var todayStart = today.getTime() / 1000;
 
-    try {
-        let ambientWeatherData = await got(
-            requestURL)
-            .json();
-        
-        var endTime = Date.now() - 86400000;
-        var today = new Date();
-        today.setHours(0,0,0);
-        var todayStart = today.getTime() / 1000;
+    var lastDayData = getHistory(endTime, 288);
+    var tempDiff = stationJson[0].lastData.tempf - lastDayData[0].tempf;
 
-        var lastDayData = getHistory(endTime, 288);
-        var tempDiff = ambientWeatherData[0].lastData.tempf - lastDayData[0].tempf;
-
-        var tempArray = [];
-        lastDayData.forEach(d => {
-            if(d.dateutc >= todayStart) {
-                tempArray.push(d.tempf);
-            }
-        })
-
-        var maxTemp = Math.max(...tempArray);
-        var minTemp = Math.min(...tempArray);
-        var avgTemp = tempArray.reduce((a, b) => a + b) / tempArray.length;
-
-        // console.log('todayStart: ' + today.getTime());
-        // console.log('endDate: ' + endTime);
-        // console.log(tempArray);
-
-        if(forecastJson == '')
-            updateForecastData();
-
-        let response = {
-            weatherData : ambientWeatherData, 
-            forecastData : forecastJson,
-            lastDay : { 
-                "tempDiff" : tempDiff,
-                "maxTemp" : maxTemp,
-                "minTemp" : minTemp,
-                "avgTemp" : avgTemp
-            }
+    var tempArray = [];
+    lastDayData.forEach(d => {
+        if(d.dateutc >= todayStart) {
+            tempArray.push(d.tempf);
         }
+    })
 
-        res.json(response);
-    } catch (error) {
-        console.log(error);
+    var maxTemp = Math.max(...tempArray);
+    var minTemp = Math.min(...tempArray);
+    var avgTemp = tempArray.reduce((a, b) => a + b) / tempArray.length;
+
+    // console.log('todayStart: ' + today.getTime());
+    // console.log('endDate: ' + endTime);
+    // console.log(tempArray);
+
+    if(forecastJson == '')
+        updateForecastData();
+
+    let response = {
+        weatherData : stationJson, 
+        forecastData : forecastJson,
+        lastDay : { 
+            "tempDiff" : tempDiff,
+            "maxTemp" : maxTemp,
+            "minTemp" : minTemp,
+            "avgTemp" : avgTemp
+        }
     }
+
+    res.json(response);
 });
 
 app.get('/api/history', async (req, res) => {
@@ -90,6 +82,18 @@ app.get('/api/history', async (req, res) => {
 app.get('/', async (req, res) => {
     res.sendFile(path.join(buildPath, 'index.html'));
 });
+
+async function updateStationData() {
+    try {
+        stationJson = await got(
+            requestURL)
+            .json();
+
+        console.log(stationJson);
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 async function updateForecastData() {
     try {
@@ -276,15 +280,21 @@ async function compareValues() {
 }
 
 function getHistory(endTime, limit = 288) {
-    let query = db.prepare(`SELECT * FROM minutedata WHERE dateutc >= ? LIMIT ?`);
-    let entries = query.all(endTime / 1000, limit) ;
-    // console.log(entries);
-    return entries;
+    try {
+        let query = db.prepare(`SELECT * FROM minutedata WHERE dateutc >= ? LIMIT ?`);
+        let entries = query.all(endTime / 1000, limit) ;
+        console.log(entries);
+        return entries;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
+updateStationData();
 updateForecastData();
 backfillHistory();
 
+setInterval(updateStationData, 60000);
 setInterval(updateForecastData, 3600000);
 setInterval(updateHistoryData, 300000);
 
