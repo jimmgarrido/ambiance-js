@@ -113,7 +113,7 @@ class Almanac extends React.Component {
                                     </div>
                                     <div className="col-sm-6 col-md-3">
                                         <h4>Dew Point</h4>
-                                        <h3>{parseInt(this.props.weatherData.dewPointin)}%</h3>
+                                        <h3>{parseInt(this.props.weatherData.dewPointin)}°</h3>
                                     </div>
                                 </div>
                             </div>
