@@ -4,7 +4,6 @@ import Almanac from './components/Almanac'
 import TempHeader from './components/TempHeader'
 import './css/mini-default.css'
 import './css/App.scss'
-import HistoryChart from './components/HistoryChart'
 
 class App extends React.Component {
   constructor(props) {

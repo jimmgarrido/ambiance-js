@@ -1,12 +1,13 @@
-import React from 'react'
-import Chart from 'chart.js'
+import React from 'react';
+import Chart from 'chart.js/auto';
+import 'chartjs-adapter-date-fns';
 
 class HistoryChart extends React.Component {
     constructor(props) {
         super(props)
 
-        Chart.defaults.global.legend.display = false;
-        Chart.defaults.global.elements.point.radius = 0;
+        Chart.defaults.plugins.legend.display = false;
+        Chart.defaults.elements.point.radius = 0;
 
         this.myChartCanvas = React.createRef()
         // this.test = Array.from(this.props.data)
@@ -42,7 +43,7 @@ class HistoryChart extends React.Component {
             },
             options: {
                 scales: {
-                    xAxes: [{
+                    x: {
                         type: 'time',
                         time: {
                             unit: 'minute',
@@ -54,8 +55,8 @@ class HistoryChart extends React.Component {
                         gridLines: {
                             display: false
                         }
-                    }],
-                    yAxes: [
+                    },
+                    y: 
                     //     {
                     //     id: 'humidity-axis',
                     //     type: 'linear',
@@ -83,7 +84,7 @@ class HistoryChart extends React.Component {
                                 return value + '°'
                             }
                         }
-                    }]
+                    }
                 },
                 legend: {
                     display: true,
