@@ -34,7 +34,7 @@ app.get('/api/current', async (req, res) => {
     var todayStart = today.getTime() / 1000;
 
     var lastDayData = getHistory(endTime, 288);
-    var tempDiff = stationJson[0].lastData.tempf - lastDayData[0].tempf;
+    var tempDiff = lastDayData[0] ? (stationJson[0].lastData.tempf - lastDayData[0].tempf) : null;
 
     var tempArray = [];
     lastDayData.forEach(d => {
@@ -43,9 +43,15 @@ app.get('/api/current', async (req, res) => {
         }
     })
 
-    var maxTemp = Math.max(...tempArray);
-    var minTemp = Math.min(...tempArray);
-    var avgTemp = tempArray.reduce((a, b) => a + b) / tempArray.length;
+    let maxTemp = null;
+    let minTemp = null;
+    let avgTemp = null;
+
+    if(tempArray.length > 0) {
+        maxTemp = Math.max(...tempArray);
+        minTemp = Math.min(...tempArray);
+        avgTemp = tempArray.reduce((a, b) => a + b) / tempArray.length;
+    }
 
     // console.log('todayStart: ' + today.getTime());
     // console.log('endDate: ' + endTime);
