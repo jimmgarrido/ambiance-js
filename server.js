@@ -57,8 +57,9 @@ app.get('/api/current', async (req, res) => {
     // console.log('endDate: ' + endTime);
     // console.log(tempArray);
 
-    if(forecastJson == '')
+    if(forecastJson == '') {
         updateForecastData();
+    }
 
     let response = {
         weatherData : stationJson, 
@@ -102,15 +103,16 @@ async function updateStationData() {
 }
 
 async function updateForecastData() {
-    try {
-        let darkSkyData = await got(`https://api.darksky.net/forecast/${process.env.FORECAST_API_KEY}/${process.env.FORECAST_LAT_LON}`).json();
-        forecastJson = {
-            data : darkSkyData,
-            updated : Date.now()
-        }
-    } catch (error) {
-        console.log(error);
-    }
+    forecastJson = [];
+    // try {
+    //     let darkSkyData = await got(`https://api.darksky.net/forecast/${process.env.FORECAST_API_KEY}/${process.env.FORECAST_LAT_LON}`).json();
+    //     forecastJson = {
+    //         data : darkSkyData,
+    //         updated : Date.now()
+    //     }
+    // } catch (error) {
+    //     console.log(error);
+    // }
 };
 
 async function backfillHistory()
