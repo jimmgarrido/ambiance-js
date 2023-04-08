@@ -50,10 +50,9 @@ class HistoryChart extends React.Component {
               x: {
                 type: 'timeseries',
                 time: {
-                  unit: 'second',
+                  unit: 'minute',
                   stepSize: 120,
                   displayFormats: {
-                    second: 'H:mm',
                     minute: 'H:mm'
                   }
                 },
