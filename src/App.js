@@ -41,7 +41,7 @@ class App extends React.Component {
         weatherData : data.weatherData[0].lastData,
         forecastData : data.forecastData,
         lastDayData : data.lastDay
-      })
+      });
     })
   }
 
@@ -53,7 +53,9 @@ class App extends React.Component {
     .then((data) => {
       this.setState({
         historicalData: data.data
-      })
+      });
+      console.log("TEST");
+      console.log(this.state.historicalData);
     })
   }
 

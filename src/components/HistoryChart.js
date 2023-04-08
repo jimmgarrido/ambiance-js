@@ -37,66 +37,78 @@ class HistoryChart extends React.Component {
 
         //https://www.createwithdata.com/react-chartjs-dashboard/
         var myChart = new Chart(this.myChartCanvas.current, {
-            type: 'line',
-            data: {
-                datasets: this.props.data
+          type: 'line',
+          data: {
+            datasets: this.props.data
+          },
+          options: {
+            interaction: {
+              mode: 'index',
+              intersect: false
             },
-            options: {
-                scales: {
-                    x: {
-                        type: 'time',
-                        time: {
-                            unit: 'minute',
-                            stepSize: 120,
-                            displayFormats: {
-                                minute: 'H:mm'
-                            }
-                        },
-                        gridLines: {
-                            display: false
-                        }
-                    },
-                    y: 
-                    //     {
-                    //     id: 'humidity-axis',
-                    //     type: 'linear',
-                    //     position: 'left',
-                    //     scaleLabel: {
-                    //         display: true,
-                    //         labelString: 'Humidity'
-                    //     },
-                    //     ticks: {
-                    //         max: 100,
-                    //         min: 0,
-                    //         callback: function(value, index, values) {
-                    //             return value + '%'
-                    //         }
-                    //     },
-                    //     gridLines: {
-                    //         drawOnChartArea: false
-                    //     }
-                    // }, 
-                    {
-                        type: 'linear',
-                        position: 'right',
-                        ticks: {
-                            callback: function(value, index, values) {
-                                return value + '°'
-                            }
-                        }
-                    }
+            scales: {
+              x: {
+                type: 'timeseries',
+                time: {
+                  unit: 'second',
+                  stepSize: 120,
+                  displayFormats: {
+                    second: 'H:mm',
+                    minute: 'H:mm'
+                  }
                 },
-                legend: {
-                    display: true,
-                    labels: {
-                        boxWidth: 15
-                    }
+                ticks: {
+                  source: 'data'
                 },
-                layout: {
-                    padding: 10
+                grid: {
+                  display: true
+                }
+              },
+              y: 
+              //     {
+              //     id: 'humidity-axis',
+              //     type: 'linear',
+              //     position: 'left',
+              //     scaleLabel: {
+              //         display: true,
+              //         labelString: 'Humidity'
+              //     },
+              //     ticks: {
+              //         max: 100,
+              //         min: 0,
+              //         callback: function(value, index, values) {
+              //             return value + '%'
+              //         }
+              //     },
+              //     gridLines: {
+              //         drawOnChartArea: false
+              //     }
+              // }, 
+              {
+                type: 'linear',
+                position: 'right',
+                grid: {
+                  display: false
                 },
-                maintainAspectRatio: false
-            }
+                ticks: {
+                  callback: function(value, index, values) {
+                    return value + '°'
+                  }
+                }
+              }
+            },
+            legend: {
+                display: true,
+                labels: {
+                    boxWidth: 15
+                }
+            },
+            layout: {
+                padding: 10
+            },
+            // onHover: onChartHover,
+            maintainAspectRatio: false
+          }
         });
     }
 
@@ -109,6 +121,14 @@ class HistoryChart extends React.Component {
             </div>
         )
     }
+}
+
+function onChartHover(e,elements,chart) {
+  console.log([
+    e,
+    elements,
+    chart
+  ]);
 }
 
 export default HistoryChart;
