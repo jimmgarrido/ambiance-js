@@ -42,6 +42,7 @@ class HistoryChart extends React.Component {
             datasets: this.props.data
           },
           options: {
+            events: ['pointermove', 'pointerout'],
             interaction: {
               mode: 'index',
               intersect: false
