@@ -8,6 +8,7 @@ class HistoryChart extends React.Component {
 
         Chart.defaults.plugins.legend.display = false;
         Chart.defaults.elements.point.radius = 0;
+        Chart.defaults.elements.point.hoverRadius = 0;
 
         this.myChartCanvas = React.createRef()
         // this.test = Array.from(this.props.data)
@@ -107,7 +108,9 @@ class HistoryChart extends React.Component {
                 padding: 10
             },
             // onHover: onChartHover,
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            resizeDelay: 10,
+            spanGaps: true
           }
         });
     }
