@@ -1,5 +1,5 @@
 import React from 'react'
-import HistoryChart from './HistoryChart'
+import HistoryChart from './HistoryChart.js'
 
 class TempChart extends React.Component {
     constructor(props) {

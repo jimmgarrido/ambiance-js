@@ -1,6 +1,6 @@
 import React from 'react'
-import TempChart from './TempChart'
-import HistoryChart from './HistoryChart'
+import TempChart from './TempChart.js'
+import HistoryChart from './HistoryChart.js'
 
 class Almanac extends React.Component {
     constructor(props) {

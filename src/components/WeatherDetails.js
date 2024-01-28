@@ -1,5 +1,5 @@
 import React from 'react'
-import DetailItem from './DetailItem';
+import DetailItem from './DetailItem.js';
 
 class WeatherDetails extends React.Component {
   constructor(props) {

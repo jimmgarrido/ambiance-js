@@ -1,7 +1,7 @@
 import React from 'react'
-import WeatherDetails from './components/WeatherDetails'
-import Almanac from './components/Almanac'
-import TempHeader from './components/TempHeader'
+import WeatherDetails from './components/WeatherDetails.js'
+import Almanac from './components/Almanac.js'
+import TempHeader from './components/TempHeader.js'
 import './css/mini-default.css'
 import './css/App.scss'
 
