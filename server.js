@@ -1,15 +1,16 @@
-require('dotenv').config();
-const express = require('express');
-const path = require('path');
+import got from 'got'
+import 'dotenv/config'
+import express from 'express';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
 const app = express();
 const port = process.env.PORT || 4000;
-const got = require('got');
 // const cors = require('cors')
-const Database = require('better-sqlite3');
+import Database from 'better-sqlite3';
 const env = process.env.NODE_ENV;
 const dir = (env === 'dev') ? '' : '/storage/';
 const dbPath = dir + 'ambiserve.db';
-const buildPath = path.join(__dirname, 'build');
+const buildPath = path.join(path.dirname(fileURLToPath(import.meta.url)), 'build');
 
 let corsOptions = {
     origin : '*'
@@ -158,16 +159,21 @@ async function backfillHistory()
 
 async function getHistoricalData(endDate, limit = 288)
 {
-    let prevData = await got(
-        `https://api.ambientweather.net/v1/devices/${process.env.AMBIENT_DEVICE_MAC}?applicationKey=${process.env.AMBIENT_APP_KEY}&apiKey=${process.env.AMBIENT_API_KEY}&endDate=${endDate}&limit=${limit}`)
-        .json();
+    try {
+        let prevData = await got(
+            `https://api.ambientweather.net/v1/devices/${process.env.AMBIENT_DEVICE_MAC}?applicationKey=${process.env.AMBIENT_APP_KEY}&apiKey=${process.env.AMBIENT_API_KEY}&endDate=${endDate}&limit=${limit}`)
+            .json();
 
-    for(let e of prevData) {
-        let time = e.dateutc;
-        e.dateutc = time / 1000;
+        for(let e of prevData) {
+            let time = e.dateutc;
+            e.dateutc = time / 1000;
+        }
+    
+        return prevData;
+    } catch (error) {
+        console.error('Error getting historical data!');
+        console.log(error);
     }
-
-    return prevData;
 }
 
 function insertData(historicalData)
